@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script defer type="text/javascript" src="./opentype.js"></script>
+        <script defer type="text/javascript">
+            function download(){
+                var notdefGlyph = new opentype.Glyph({
+                    name: '.notdef',
+                    unicode: 0,
+                    advanceWidth: 650,
+                    path: new opentype.Path()
+                });
+
+                var spaceGlyph = new opentype.Glyph({
+                    name: 'space',
+                    unicode: 32,
+                    advanceWidth: 650,
+                    path: new opentype.Path()
+                });
+
+                var aPath = new opentype.Path();
+                aPath.moveTo(100, 0);
+                aPath.lineTo(100, 700);
+                // more drawing instructions...
+                var aGlyph = new opentype.Glyph({
+                    name: 'A',
+                    unicode: 65,
+                    advanceWidth: 650,
+                    path: aPath
+                });
+
+                var glyphs = [notdefGlyph, aGlyph, spaceGlyph];
+
+                // Warning: 
+                // Logging mesasge here: The NaN numbers come from heres
+                console.log(aGlyph.getPath());
+
+                var font = new opentype.Font({
+                familyName: 'OpenTypeSans',
+                styleName: 'Medium',
+                unitsPerEm: 1000,
+                ascender: 800,
+                descender: -200,
+                glyphs: glyphs});
+            }
+        </script>
+    </head>
+    <body onload="download();">
+
+    </body>
+</html>
